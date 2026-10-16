@@ -11,7 +11,9 @@ void pedeNum(){
     scanf("%f", &num2);
 }
 
-void menu(){
+int menu(){
+    int resultado_scanf;
+
     printf("===============================\n");
     printf("   Calculadora Simples\n");
     printf("===============================\n");
@@ -22,7 +24,15 @@ void menu(){
     printf("4. Divisão\n");
     printf("5. Sair\n");
     printf("Opção: ");
-    scanf("%d", &opcao);
+    
+    resultado_scanf = scanf("%d", &opcao);
+
+    if (resultado_scanf != 1) {
+        opcao = -1;
+        while (getchar() != '\n');
+    }
+
+    return opcao;
 }
 
 int main(){
@@ -35,11 +45,6 @@ int main(){
         if(opcao == 5){
             printf("Obrigado por usar a calculadora! Até a próxima.");
             break;
-        }
-
-        if(opcao < 1 || opcao > 5){
-            printf("Opção inválida!\n");
-            continue;
         }
 
         switch(opcao){
@@ -79,7 +84,7 @@ int main(){
             } 
             else {
                 printf("Resposta inválida. Por favor, digite 's' para sim ou 'n' para não.");
-            }
+                }
         }
     }
     return 0;
