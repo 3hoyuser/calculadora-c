@@ -1,5 +1,6 @@
 //Calculadora em C.
 #include <stdio.h>
+#include <string.h>
 
 int opcao;
 float num1, num2;
@@ -12,7 +13,8 @@ void pedeNum(){
 }
 
 int menu(){
-    int resultado_scanf;
+    char entrada[100];
+    int valido;
 
     while(1) {
         printf("===============================\n");
@@ -26,15 +28,20 @@ int menu(){
         printf("5. Sair\n");
         printf("Opção: ");
         
-        resultado_scanf = scanf("%d", &opcao);
+        
+        if (fgets(entrada, sizeof(entrada), stdin) == NULL){
+            continue;
+        }
 
-        if (resultado_scanf != 1 || opcao < 1 || opcao > 5){
-            printf("Opção inválida!\n\n");
-            while (getchar() != '\n'); 
+        entrada[strcspn(entrada, "\r\n")] = '\0';
+
+        
+        if (strlen(entrada) == 1 && entrada[0] >= '1' && entrada[0] <= '5'){
+            opcao = entrada[0] - '0';
+            break;
         } 
         else{
-            while (getchar() != '\n');
-            break;
+            printf("Opção inválida!\n\n");
         }
     }
 
