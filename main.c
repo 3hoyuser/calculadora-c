@@ -14,22 +14,28 @@ void pedeNum(){
 int menu(){
     int resultado_scanf;
 
-    printf("===============================\n");
-    printf("   Calculadora Simples\n");
-    printf("===============================\n");
-    printf("Selecione uma operação:\n");
-    printf("1. Adição\n");
-    printf("2. Subtração\n");
-    printf("3. Multiplicação\n");
-    printf("4. Divisão\n");
-    printf("5. Sair\n");
-    printf("Opção: ");
-    
-    resultado_scanf = scanf("%d", &opcao);
+    while(1) {
+        printf("===============================\n");
+        printf("   Calculadora Simples\n");
+        printf("===============================\n");
+        printf("Selecione uma operação:\n");
+        printf("1. Adição\n");
+        printf("2. Subtração\n");
+        printf("3. Multiplicação\n");
+        printf("4. Divisão\n");
+        printf("5. Sair\n");
+        printf("Opção: ");
+        
+        resultado_scanf = scanf("%d", &opcao);
 
-    if (resultado_scanf != 1) {
-        opcao = -1;
-        while (getchar() != '\n');
+        if (resultado_scanf != 1 || opcao < 1 || opcao > 5){
+            printf("Opção inválida!\n\n");
+            while (getchar() != '\n'); 
+        } 
+        else{
+            while (getchar() != '\n');
+            break;
+        }
     }
 
     return opcao;
