@@ -1,6 +1,7 @@
 //Calculadora em C.
 #include <stdio.h>
 
+int opcao;
 float num1, num2;
 
 void pedeNum(){
@@ -10,9 +11,7 @@ void pedeNum(){
     scanf("%f", &num2);
 }
 
-int menu(){
-    int opcao;
-    
+void menu(){
     printf("===============================\n");
     printf("   Calculadora Simples\n");
     printf("===============================\n");
@@ -24,15 +23,25 @@ int menu(){
     printf("5. Sair\n");
     printf("Opção: ");
     scanf("%d", &opcao);
-
-    return opcao;
 }
 
 int main(){
-    int opcao = menu();
     char resposta;
 
-    while(opcao > 0 && opcao < 6){
+    while(1){
+
+        menu();
+
+        if(opcao == 5){
+            printf("Obrigado por usar a calculadora! Até a próxima.");
+            break;
+        }
+
+        if(opcao < 1 || opcao > 5){
+            printf("Opção inválida!\n");
+            continue;
+        }
+
         switch(opcao){
             case 1: 
                 pedeNum();
@@ -55,20 +64,23 @@ int main(){
                     printf("Resultado: %.2f / %.2f = %.2f", num1, num2, num1 / num2);
                 }
                 break;
-            case 5:
-                printf("Obrigado por usar a calculadora! Até a próxima.");
-                break;
         }
         
-        printf("\nDeseja realizar outra operação? (s/n): ");
-        scanf(" %c", &resposta);
+        while(1){
+            printf("\nDeseja realizar outra operação? (s/n): ");
+            scanf(" %c", &resposta);
 
-        if(resposta == 's')
-            opcao = menu();
-        else if(resposta == 'n')
-            printf("Obrigado por usar a calculadora! Até a próxima.");
-            break;
+            if(resposta == 's' || resposta == 'S'){
+                break; 
+            } 
+            else if(resposta == 'n' || resposta == 'N'){
+                printf("Obrigado por usar a calculadora! Até a próxima.\n");
+                return 0;
+            } 
+            else {
+                printf("Resposta inválida. Por favor, digite 's' para sim ou 'n' para não.");
+            }
+        }
     }
-
     return 0;
 }
